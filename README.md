@@ -1,10 +1,7 @@
 # flask-api
 
 사용하려면 
-1. source bin/activate
-2. conda activate jupyter 
-해줘야 해요  
-가상환경 뭔가 복잡해서 하다보니 저리됨
+tensorflow 깔려있는 가상환경.... 필요쓰
 
 전체메일함/광고/구매및주문내역/로그인및인증내역/교육
 이렇게 나눠놨는데 
