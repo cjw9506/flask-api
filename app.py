@@ -9,7 +9,7 @@ from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-def morphemes():    
+def morphemes(): #입력받은 값을 명사, 동사만 뽑아서 리스트화
     content = request.form['id_name']
 
     kkma = Kkma()
@@ -27,10 +27,10 @@ def morphemes():
     word = " ".join(a+b)
     words = word.split(maxsplit=0)
     return words
-    
-def read_data():
+
+def read_data(): #xlsx파일 읽어서 전처리하기전에 마지막 인덱스에 입력한 값 추가
     words = morphemes()
-    df = pd.read_excel('/home/hufsice/크롤링/광고 (사본)3.xlsx')
+    df = pd.read_excel('crawling.xlsx')
     
     arr = df['명사+동사'].values
     doc = arr.tolist()
@@ -42,7 +42,7 @@ def read_data():
     data = pad_sequences(sequences, maxlen=300)
     return data
 
-def result(): 
+def result(): #모델 돌려서 prediction 기준으로 리턴값 준것
     category = read_data() 
     model = load_model('dp__model.h5')
     predictions = model.predict(category)
@@ -66,7 +66,7 @@ def result():
             return "교육"
     
 @app.route('/', methods=['GET', 'POST'])
-def test():
+def test(): #이부분은 너가 더 잘 알거라고 생각쓰..
     if request.method =='GET':
         return render_template('post.html')
     elif request.method == 'POST':
